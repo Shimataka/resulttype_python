@@ -1,3 +1,3 @@
-from .result import Result, Ok, Err, question, result
+from .result import Err, Ok, Result, question, result
 
-__all__ = ["Result", "Ok", "Err", "question", "result"]
+__all__ = ["Err", "Ok", "Result", "question", "result"]
