@@ -1,31 +1,42 @@
-# example_new_repo
+# pyresults
 
-## Description
+`PyResults` は、Rustの `Result` 型に似たPythonの型です。
 
-このリポジトリは、GitHubにおける開発環境のセットアップを容易にするためのテンプレートです。
-このプロジェクトは、バージョン管理と協力作業のための基本的なテンプレートとして機能します。
+## 特徴
 
-## How to use
+- エラーハンドリングのための型を提供
+- エラーを伝播するためのデコレータを提供
+- エラーをデフォルト値で処理するための関数を提供
+- エラーをマッピングするための関数を提供
 
-1. このリポジトリからテンプレートを作成( `Use this template` ボタンから)、
-または `.git` 以外の中身を新しいリポジトリにコピーしてください。
-1. 目的に合わせて調整してください。
-    - Pythonの場合、[Python開発環境の場合](.settings/templates/python/template.md)を参照してください。
-    - Rustの場合、[Rust開発環境の場合](.settings/templates/rust/template.md)を参照してください。
-    - Gitによるバージョン管理を行う場合、[Git環境の場合](.settings/templates/git/template.md)を参照してください。
-    - その他の言語は考慮されていません。希望がある場合はissueにてお願いします。
+## インストール
 
-## Technology stack
+- pip非対応
+- GitHubリポジトリからインストールする場合は、以下のコマンドを実行してください。
 
-| カテゴリー | ツール |
-| --- | --- |
-| IDE設定 | [EditorConfig](https://editorconfig.org/) |
-| CI/CD | [GitHub Actions](https://github.com/features/actions) |
-| コードレビュー | [reviewdog](https://github.com/reviewdog/reviewdog) |
-| リリース | [semantic-release](https://semantic-release.gitbook.io/semantic-release/) |
-| 依存性更新 | [Dependabot](https://docs.github.com/ja/code-security/dependabot) |
-| Git commit messages | [commitlint](https://commitlint.js.org/) |
-| Credentials | [Secretlint](https://github.com/secretlint/secretlint) |
-| Markdown | [markdownlint-cli](https://github.com/igorshubovych/markdownlint-cli) |
-| YAML | [yamllint](https://yamllint.readthedocs.io/) |
-| GitHub Actions Workflow | [actionlint](https://github.com/rhysd/actionlint) |
+```bash
+pip install git+https://github.com/Shimataka/pyresults.git
+```
+
+## 使用例
+
+### 基本的な使用例
+
+[example01_basic.py](examples/example01_basic.py) を参考。
+
+```python
+from pyresults import Ok, Err, Result, result, question
+
+def divide(a: float, b: float) -> Result[float, str]:
+    if b == 0:
+        return Err("ゼロ除算エラー")
+    return Ok(a / b)
+
+result1 = divide(10, 2)
+if result1.is_ok():
+    print(result1.unwrap())  # 5.0
+
+result2 = divide(10, 0)
+if result2.is_err():
+    print(result2.unwrap_err())  # "ゼロ除算エラー"
+```
