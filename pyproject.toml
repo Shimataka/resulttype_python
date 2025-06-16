@@ -149,3 +149,11 @@ python_classes = ["Test*"]
 python_functions = ["test_*"]
 pythonpath = ["src"]
 testpaths = ["tests"]
+
+[tool.coverage.run]
+source = ["src"]
+omit = [
+    "src/**/main.py",
+    "src/**/__init__.py",
+    "tests/**/*.py",
+]
