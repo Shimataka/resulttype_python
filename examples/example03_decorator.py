@@ -24,7 +24,7 @@ def outer_function() -> Result[int, str]:
     return Ok(result)
 
 
-result = outer_function()  # Err("error@inner_function")
+result_value = outer_function()  # Err("error@inner_function")
 
-if result.is_err():
-    print(result.unwrap_err())
+if result_value.is_err():
+    print(result_value.unwrap_err())
