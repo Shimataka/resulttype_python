@@ -222,3 +222,39 @@ class Result(Generic[T, E], abc.ABC):
         Returns:
             Iterator[E]: Iterator over the error value
         """
+
+    @abc.abstractmethod
+    def transpose(self) -> "Result[T, E] | None":
+        """Transpose the result.
+
+        Result[T | None, E] -> Result[T, E] | None
+
+        Returns:
+            Result[T, E] | None: The result of the transpose
+
+        Example:
+            >>> Ok(None).transpose()
+            None
+            >>> Ok(1).transpose()
+            Ok(1)
+            >>> Err(e).transpose()
+            Err(e)
+        """
+
+    @abc.abstractmethod
+    def flatten(self) -> "Result[T, E]":
+        """Flatten the result.
+
+        Result[Result[T, E], E] -> Result[T, E]
+
+        Returns:
+            Result[T, E]: The result of the flatten
+
+        Example:
+            >>> Ok(Ok(1)).flatten()
+            Ok(1)
+            >>> Ok(Err(e)).flatten()
+            Err(e)
+            >>> Err(e).flatten()
+            Err(e)
+        """

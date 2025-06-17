@@ -288,3 +288,23 @@ class Err(Result[T, E]):
             [1]
         """
         yield from iter([self.error])
+
+    def transpose(self) -> "Result[T, E] | None":
+        """Transpose the result.
+
+        - Err(E) -> Err(E)
+
+        Returns:
+            Result[T, E] | None: The result of the transpose
+        """
+        return self
+
+    def flatten(self) -> "Result[T, E]":
+        """Flatten the result.
+
+        - Err(E) -> Err(E)
+
+        Returns:
+            Result[T, E]: The result of the flatten
+        """
+        return self
