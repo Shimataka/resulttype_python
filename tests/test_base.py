@@ -99,3 +99,23 @@ def test_iter_err() -> None:
 
     assert list(ok_result.iter_err()) == []
     assert list(err_result.iter_err()) == ["error"]
+
+
+def test_transpose() -> None:
+    ok_result: Result[int, str] = Ok(42)
+    none_result: Result[None, str] = Ok(None)
+    err_result: Result[int, str] = Err("error")
+
+    assert ok_result.transpose() == Ok(42)
+    assert none_result.transpose() is None
+    assert err_result.transpose() == Err("error")
+
+
+def test_flatten() -> None:
+    ok_result: Result[Result[int, str], str] = Ok(Ok(42))
+    err_result: Result[Result[int, str], str] = Ok(Err("error"))
+    err_result_2: Result[Result[int, str], str] = Err("error")
+
+    assert ok_result.flatten() == Ok(42)
+    assert err_result.flatten() == Err("error")
+    assert err_result_2.flatten() == Err("error")
