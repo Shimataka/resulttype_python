@@ -17,7 +17,7 @@ RustのResult型をPythonに移植した型安全なエラーハンドリング�
 ## インストール
 
 ```bash
-pip install pyresults
+pip install git+https://github.com/Shimataka/resulttype_python.git
 ```
 
 ## 基本的な使い方
