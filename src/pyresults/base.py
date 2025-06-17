@@ -42,6 +42,28 @@ class Result(Generic[T, E], abc.ABC):
         - iter_err
     """
 
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, Result):
+            return False
+        if self.is_ok() and other.is_ok():
+            return self.unwrap() == other.unwrap()  # type: ignore[reportUnknownVariableType]
+        if self.is_err() and other.is_err():
+            return self.unwrap_err() == other.unwrap_err()  # type: ignore[reportUnknownVariableType]
+        return False
+
+    def __ne__(self, other: object) -> bool:
+        return not self.__eq__(other)
+
+    def __repr__(self) -> str:
+        if self.is_ok():
+            return f"Ok({self.unwrap()!r})"
+        return f"Err({self.unwrap_err()!r})"
+
+    def __str__(self) -> str:
+        if self.is_ok():
+            return f"Ok({self.unwrap()!s})"
+        return f"Err({self.unwrap_err()!s})"
+
     @abc.abstractmethod
     def is_ok(self) -> bool:
         """Determine if the result is success.
