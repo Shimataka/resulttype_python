@@ -42,13 +42,21 @@ class Result(Generic[T, E], abc.ABC):
         - iter_err
     """
 
+    @abc.abstractmethod
+    def __hash__(self) -> int:
+        """Hash the result.
+
+        Returns:
+            int: Hash of the value of the result
+        """
+
     def __eq__(self, other: object) -> bool:
         if not isinstance(other, Result):
             return False
         if self.is_ok() and other.is_ok():
-            return self.unwrap() == other.unwrap()  # type: ignore[reportUnknownVariableType]
+            return self.unwrap() == other.unwrap()  # type: ignore[reportUnknownVariableType, no-any-return]
         if self.is_err() and other.is_err():
-            return self.unwrap_err() == other.unwrap_err()  # type: ignore[reportUnknownVariableType]
+            return self.unwrap_err() == other.unwrap_err()  # type: ignore[reportUnknownVariableType, no-any-return]
         return False
 
     def __ne__(self, other: object) -> bool:
