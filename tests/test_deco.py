@@ -22,7 +22,7 @@ def test_divide() -> None:
 @result
 def divide_by_zero(a: float, _: float) -> Result[float, str]:
     with pytest.raises(UnwrapError):
-        return Ok(question(divide(a, 0)))
+        _ = question(divide(a, 0))
     return Err("ゼロ除算エラー")
 
 
