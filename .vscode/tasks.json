@@ -21,7 +21,7 @@
             "args": [
                 "ruff",
                 "check",
-                "${workspaceFolder}/src/PyResults"
+                "${workspaceFolder}/src/pyresults"
             ],
             "hide": true,
             "options": {
@@ -98,7 +98,7 @@
                 "-f",
                 "-o",
                 "${workspaceFolder}/docs/source",
-                "${workspaceFolder}/src/PyResults/"
+                "${workspaceFolder}/src/pyresults/"
             ],
             "hide": true
         },

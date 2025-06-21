@@ -334,8 +334,3 @@ MIT License
 - [Example01](./examples/example01_basic.py)
 - [Example02](./examples/example02_default.py)
 - [Example03](./examples/example03_decorator.py)
-
-## 参考
-
-- [Rust Result型ドキュメント](https://doc.rust-lang.org/std/result/)
-- [関数型プログラミングにおけるエラーハンドリング](https://fsharpforfunandprofit.com/rop/)

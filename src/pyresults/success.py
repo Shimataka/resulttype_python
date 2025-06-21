@@ -20,6 +20,9 @@ class Ok(Result[T, E]):
 
     value: T
 
+    def __hash__(self) -> int:
+        return hash(self.value)
+
     def is_ok(self) -> bool:
         """Determine if the result is success.
 

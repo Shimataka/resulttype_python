@@ -20,6 +20,9 @@ class Err(Result[T, E]):
 
     error: E
 
+    def __hash__(self) -> int:
+        return hash(self.error)
+
     def is_ok(self) -> bool:
         """Determine if the result is success.
 
