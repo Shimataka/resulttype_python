@@ -11,7 +11,7 @@ E = TypeVar("E")  # Type of error value
 P = ParamSpec("P")  # Parameter specification
 
 
-def result(func: Callable[..., Result[T, E]]) -> Callable[..., Result[T, E]]:
+def result(func: Callable[P, Result[T, E]]) -> Callable[P, Result[T, E]]:
     """Decorator to implement question operator functionality.
 
     Makes it easier to handle other functions that return Result type
@@ -88,8 +88,8 @@ def question(result: Result[T, E]) -> T:
         ...
         UnwrapError: Called unwrap on an Err value: ゼロ除算エラー
     """
-    if isinstance(result, Ok):
-        return result.value
+    if result.is_ok():
+        return result.unwrap()
     raise UnwrapError(result, "result is Err")
 
 
