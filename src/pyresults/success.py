@@ -291,3 +291,41 @@ class Ok(Result[T, E]):
             []
         """
         yield from iter([])
+
+    def transpose(self) -> "Result[T, E] | None":
+        """Transpose the result.
+
+        - Ok(None) -> None
+        - Ok(T) -> Ok(T)
+
+        Returns:
+            Result[T, E] | None: The result of the transpose
+
+        Example:
+            >>> Ok(None).transpose()
+            None
+            >>> Ok(1).transpose()
+            Ok(1)
+        """
+        if self.value is None:
+            return None
+        return Ok(self.value)
+
+    def flatten(self) -> "Result[T, E]":
+        """Flatten the result.
+
+        - Ok(Ok(T)) -> Ok(T)
+        - Ok(Err(E)) -> Err(E)
+
+        Returns:
+            Result[T, E]: The result of the flatten
+
+        Example:
+            >>> Ok(Ok(1)).flatten()
+            Ok(1)
+            >>> Ok(Err(e)).flatten()
+            Err(e)
+        """
+        if isinstance(self.value, Result):
+            return self.value  # type: ignore[reportUnknownVariableType]
+        return self
